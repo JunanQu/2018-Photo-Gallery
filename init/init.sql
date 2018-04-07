@@ -15,7 +15,7 @@ CREATE TABLE `photos` (
 );
 
 CREATE TABLE `tags` (
-  `tag_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
   `tag_name` TEXT NOT NULL
 );
 
@@ -32,14 +32,36 @@ CREATE TABLE `photo_users` (
 `user_name` TEXT NOT NULL
 );
 
+-- photo_tags
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('2', '1');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('2', '5');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('1', '2');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('1', '7');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('2', '5');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('6', '9');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('2', '1');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('10', '8');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('6', '7');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('10', '7');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('7', '3');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('7', '9');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('8', '4');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('3', '1');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('2', '9');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('5', '9');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('4', '9');
+INSERT INTO `photo_tags` ( photo_id, tag_id ) VALUES ('6', '3');
+-- photo_users
 INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('2', '2', 'Smashpotato');
 INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('3', '2', 'Smashpotato');
 INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('4', '2', 'Smashpotato');
 INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('5', '2', 'Smashpotato');
+INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('1', '2', 'Smashpotato');
 INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('6', '1', 'Leokerry');
-INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('7', '1', 'Leokerry');
+INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('6', '1', 'Leokerry');
 INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('8', '1', 'Leokerry');
 INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('9', '1', 'Leokerry');
+INSERT INTO `photo_users` ( photo_id, user_id, user_name) VALUES ('10', '1', 'Leokerry');
 
 -- images
 INSERT INTO  `photos` (id, photo_name, photo_ext, photo_description) VALUES ( 1, '1' ,  'jpg' ,  'Grilled Lobster, Manhattan');
@@ -57,11 +79,12 @@ INSERT INTO `accounts` (id, username, password) VALUES ( 1, 'Leokerry' ,  'corne
 INSERT INTO `accounts` (id, username, password) VALUES ( 2, 'Smashpotato' ,  'info2300isharder');
 
 --tags
-INSERT INTO  `tags` (tag_id, tag_name) VALUES ( 1, 'Husky');
-INSERT INTO  `tags` (tag_id, tag_name) VALUES ( 2,'Puppy');
-INSERT INTO  `tags` (tag_id, tag_name) VALUES ( 3, 'dogs');
-INSERT INTO  `tags` (tag_id, tag_name) VALUES ( 4, 'foody');
-INSERT INTO  `tags` (tag_id, tag_name) VALUES ( 5, 'EMP');
-INSERT INTO  `tags` (tag_id, tag_name) VALUES ( 6, 'michelin');
-INSERT INTO  `tags` (tag_id, tag_name) VALUES ( 7, 'goldenretriever');
-INSERT INTO  `tags` (tag_id, tag_name) VALUES ( 8, 'budlight');
+INSERT INTO  `tags` (id, tag_name) VALUES ( 1, 'EGG');
+INSERT INTO  `tags` (id, tag_name) VALUES ( 2,'LOBSTER');
+INSERT INTO  `tags` (id, tag_name) VALUES ( 3, 'SQUASH');
+INSERT INTO  `tags` (id, tag_name) VALUES ( 4, 'SWEET_POTATO');
+INSERT INTO  `tags` (id, tag_name) VALUES ( 5, 'DESERT');
+INSERT INTO  `tags` (id, tag_name) VALUES ( 6, 'RASPERRY');
+INSERT INTO  `tags` (id, tag_name) VALUES ( 7, 'NYC');
+INSERT INTO  `tags` (id, tag_name) VALUES ( 8, 'EMPIRE_STATE');
+INSERT INTO  `tags` (id, tag_name) VALUES ( 9, 'ELEVEN_MADISON_PARK');

@@ -1,4 +1,18 @@
+<?php
+if (isset($current_user)){
+$tabs = array(
+  "index" => "Gallery",
+  "view_my_picture" => "View My Pictures",
+  "log_out"=> "Log Out",
+);
 
+}else {
+  $tabs = array(
+    "index" => "Gallery",
+    "log_in" => "Log In"
+  );
+}
+?>
       <div class="index-banner1">
         <div class="header-top">
         <div class="wrap">
@@ -17,7 +31,7 @@
               <div class="box" id="box">
                   <div class="box_content_center1">
                     <div class="menu_box_list1">
-                      <ul>
+
                       <button onclick="myFunction()" class="dropbtn"><img src="images/nav_icon.png" alt=""></button>
                       <div id="drop_down_menu" class="dropdown-content">
                         <?php
@@ -27,11 +41,11 @@
                           } else {
                             $css_id = "class='current_page_alt'";
                           }
-                          echo "<li><a " . $css_id . " href='" . $page_id. ".php'>$page_name</a></li>";
+                          echo "<a " . $css_id . " href='" . $page_id. ".php'>$page_name</a>";
                         }
                         ?>
                       </div>
-                      </ul>
+
                      </div>
                  </div>
                </div>

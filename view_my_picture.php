@@ -4,19 +4,17 @@ $current_page_id="view_my_picture";
 <?php
 const MAX_FILE_SIZE = 10000000;
 const BOX_UPLOADS_PATH = "uploads/photos/";
+$image_types = array('gif', 'jpg', 'jpeg', 'png', 'jpe');
 if (isset($_POST["submit"]) ) {
+  $target_dir = "uploads/photos/";
+  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
   $upload_info = $_FILES["fileToUpload"];
-  if ($upload_info['error'] == UPLOAD_ERR_OK ) {
-    if ($upload_info['size'] < 3000000){
-    $target_dir = "uploads/photos/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    $upload_info = $_FILES["fileToUpload"];
-    $upload_desc = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-
-    $upload_name = basename($upload_info["name"]);
-    $upload_ext = strtolower(pathinfo($upload_name, PATHINFO_EXTENSION) );
-
+  $upload_desc = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+  $upload_name = basename($upload_info["name"]);
+  $upload_ext = strtolower(pathinfo($upload_name, PATHINFO_EXTENSION) );
+  $upload_info = $_FILES["fileToUpload"];
+  if (in_array($upload_ext, $image_types)){
+    if ($upload_info['error'] == UPLOAD_ERR_OK ) {
     $sql = "INSERT INTO  `photos` (photo_name, photo_ext, photo_description) VALUES (:filename, :extension, :description)";
     $params = array(
       ':extension' => $upload_ext,
@@ -36,13 +34,13 @@ if (isset($_POST["submit"]) ) {
         $result = exec_sql_query($db, $sql, $params);
       }
     }
-  }}
-if ($upload_info['error'] == UPLOAD_ERR_INI_SIZE ) {
-  array_push($messages, "Uploading File Exceeds PHP Default 2MB Limit.");
-}
-else {
-   array_push($messages, "Fail To Upload.");
+  }if ($upload_info['error'] != UPLOAD_ERR_OK ) {
+     array_push($messages, "Fail To Upload.");
   }
+}else {
+  array_push($messages, "Uploading File Is Not An Image.");
+}
+
 }
 ?>
 <!DOCTYPE html>
@@ -83,15 +81,10 @@ foreach($records as $record){
 
   echo "<div class='image-frame'>
         <div class='inner-frame'>
-        <form name='image_data' action='image_detail.php' method='get'>
-        <input type='image' border='0' class='images' alt='icon-image' src='uploads/photos/".htmlspecialchars($record['photo_id']).".jpg'>
-        <input name='id_carrier' type='hidden' value=".htmlspecialchars($record['photo_id']).">
-        </form>
-        <form class='tag-form' action='index.php' method='post' name='tag_input'>
-        <label class='tag_label'>Tags:</label>
-        <input type='text' name='tag_input' required>
-        <button class='tag_submit_button' name='submit_tag' type='submit' value='Submit'>Tag It!</button>
-        </form>
+        <a href='image_detail.php?id_carrier=".htmlspecialchars($record['photo_id'])."' name='image_data'>
+        <img  class='images' alt='icon-image' src='uploads/photos/".htmlspecialchars($record['photo_id']).".".htmlspecialchars($record['photo_ext'])."'>
+        </a>
+
         <form name='image_data' action='view_my_picture.php' method='post'>
         <button class='tag_submit_button' name='delete' type='submit' value='Submit'>Delete It!</button>
         <input name='id_carrier' type='hidden' value=".htmlspecialchars($record['photo_id']).">
@@ -107,7 +100,6 @@ foreach($records as $record){
 
 <?php
 if ($current_user != NULL) {
-
         echo'
         <div id="upload_frame">
         <h1 class="uploaded-message">';

@@ -3,6 +3,7 @@
 $title = "Junan's Image";
 
 
+
 // 1.
 function exec_sql_query($db, $sql, $params = array()) {
   try{
@@ -152,8 +153,6 @@ function log_out() {
 
 }
 
-
-
 if (isset($_POST['login'])) {
   $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
   $username = trim($username);
@@ -167,18 +166,6 @@ if (isset($_POST['login'])) {
 
 
 
-if (isset($current_user)){
-$tabs = array(
-  "index" => "Gallery",
-  "view_my_picture" => "View My Pictures",
-  "log_out"=> "Log Out",
-);
 
-}else {
-  $tabs = array(
-    "index" => "Gallery",
-    "log_in" => "Log In"
-  );
-}
 
 ?>
